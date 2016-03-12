@@ -5,8 +5,8 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -21,4 +21,119 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.father {
+    width: 100%;
+    position: relative;
+    top: 20px;
+}
+
+.leftDiv {
+    display: block;
+    width: 30%;
+    float: left;
+    margin-top: 20px;
+}
+
+.centerDiv {
+    display: block;
+    width: 30%;
+    float: left;
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.rightDiv {
+    display: block;
+    width: 30%;
+    float: left;
+    margin-top: 20px;
+}
+
+.news {
+    border: 1px solid #203294;
+}
+
+h1 {
+    font-size: 10px;
+}
+
+.ads {
+    margin-top:10px;
+    border: 2px solid #863131;
+    text-align:center;
+}
+.ads > div {
+    border: 2px solid #000000;
+    margin-top:10px;
+    margin-left:10px;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+
+    .ads span {
+        font-size:30px;
+    }
+.titleWord {
+    font-size:15px;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#eb7826;
+    font-weight:bold;
+    margin-top:3px;
+}
+.searchBox {
+    background-color: #f39f64;
+    border-radius:10px;
+    width:120px;
+}
+input:focus {
+    outline: none;
+}
+
+button {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:10px;
+    background-color: #fbe568;
+    border: none;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+button:hover {
+    background-color: #102074;
+    color: #ffffff;
+}
+ul {
+}
+#searchArea > ul li{
+    float:left;
+    
+    list-style:none;
+}
+
+#searchArea {
+    border: 2px solid #863131;
+    width:290px;
+    height:75px;
+
+}
+
+hr {
+    margin-top: 3px;
+    margin-bottom: 7px;
+    margin-left: 3px;
+    margin-right: 3px;
+    border: 1px solid #ff6a00;
+}
+
+#searchLocation {
+    margin-top: 5px;
+    border: 2px solid #863131;
+    width:290px;
+    height:150px;
+
+}
+.titleWordDiv {
+    margin-top:5px;
+    margin-bottom:2px;
 }

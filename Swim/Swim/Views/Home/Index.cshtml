@@ -1,31 +1,101 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "e起學游泳";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div id="father">
+    <div class="leftDiv">
+        <div>
+            <a href="#"><img src="~/Images/fb.png" style="width:35px; height:35px" />FB按讚</a>
+        </div>
+        <div>
+            <span class="titleWord">最新消息</span>
+            <div class="news">
+                消息1
+                <br />
+                消息2
+                <br />
+                消息2
+                <br />
+                消息2
+                <br />
+                消息2
+                <br />
+                消息2
+                <br />
+                消息2
+            </div>
+            <div class="ads">
+                <div>
+                    <span>廣告1</span>
+                </div>
+                <div>
+                    <span>廣告2</span>
+                </div>
+                <div>
+                    <span>廣告3</span>
+                </div>
+                <div>
+                    <span>廣告4</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="centerDiv">
+        <div id="searchArea">
+            <div class="titleWordDiv"><span class="titleWord">快速查詢</span></div>
+            <hr />
+            @Html.TextBox("searchBox", "請輸入關鍵字", new { @class = "searchBox", width = "80px" })
+            <button>找教練</button>
+            <button>找學生</button>
+        </div>
+        <div id="searchLocation">
+            <div class="titleWordDiv"><span class="titleWord">地區搜尋</span></div>
+            <hr />
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="rightDiv">
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    <div id="test" style="top:100px;left:10px;background-color:blue;border:2px solid red; position:fixed;width:150px;height:150px;">12345</div>
+
 </div>
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#searchBox').focus(function () {
+                if ($('#searchBox').val() == '請輸入關鍵字')
+                    $('#searchBox').val("");
+            });
+            $('#searchBox').blur(function () {
+                if ($('#searchBox').val() == '')
+                    $('#searchBox').val('請輸入關鍵字');
+            })
+            //滑鼠按下時加上移動時的事件
+            $("#test").mousedown(function () {
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+                $("#test").mousemove(function () {
+                    var element = $("#test");
+                    var X = element.offset()['top'] + event.clientY - mouseY;
+                    var Y = element.offset()['left'] + event.clientX - mouseX;
+                    element.offset({
+                        top: X,
+                        left: Y
+                    });
+                    mouseX = event.clientX;
+                    mouseY = event.clientY;
+                })
+            })
+            $("#test").mouseup(function () {
+                $("#test").off("mousemove");
+            })
+
+        });
+        var mouseX;
+        var mouseY;
+
+
+    </script>
+}
+
