@@ -1,41 +1,226 @@
-﻿@model Swim.Models.RegisterViewModel
+﻿@model Swim.Models.RegisterDataModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "加入會員";
 }
 
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+<h1>申請帳號</h1>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+    <table>
+        <!--我要當 教練/學生-->
+        <tr>
+            <th>
+                <span>我要當</span>
+            </th>
+            <td>
+                <label><input type="radio" name="Role" value="Coach" />教練</label>
+                <label><input type="radio" name="Role" value="Student" />學生</label>
+            </td>
+        </tr>
+        <!--帳號-->
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.UserId)
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.UserId)
+            </td>
+        </tr>
+        <!--密碼-->
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.LoginPassword)
+            </th>
+            <td>
+                @Html.PasswordFor(m => m.LoginPassword)
+            </td>
+        </tr>
+        <!--再次輸入密碼-->
+        <tr>
+            <th>
+                @Html.Label("密碼確認")
+            </th>
+            <td>
+                @Html.TextBox("dddd")
+            </td>
+        </tr>
+        <!--性別-->
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.Sex)
+            </th>
+            <td>
+                <label><input type="radio" name="Sex" value="Male" />男生</label>
+                <label><input type="radio" name="Sex" value="Female" />女生</label>
+            </td>
+        </tr>
+        <!--生日-->
+        <tr>
+            <th>
+                @Html.Label("出生年月日")
+            </th>
+            <td>
+                <span>西元</span>
+                @Html.DropDownListFor(m => m.Birthday_Year, (SelectList)ViewBag.yearList, "請選擇", new { onchange = "ChangeDayDropdownList();" })
+                <span>年 </span>
+                @Html.DropDownListFor(m => m.Birthday_Month, (SelectList)ViewBag.monthList, "請選擇", new { onchange = "ChangeDayDropdownList();" })
+                <span>月 </span>
+                @Html.DropDownListFor(m => m.Birthday_Day, (SelectList)ViewBag.dayList, "請選擇")
+                <span>日</span>
+            </td>
+        </tr>
+        <!--電子信箱-->
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.EmailAddress)
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.EmailAddress)
+            </td>
+        </tr>
+        <!--地址-->
+        <tr>
+            <th>
+                @Html.Label("居住地")
+            </th>
+            <td>
+                @Html.DropDownListFor(m => m.Address_County, (SelectList)ViewBag.countyList, "請選擇", new { onchange = "ChangeTownshipDropdownList($(this).val());" })
+                @Html.DropDownListFor(m => m.Address_Township, (SelectList)ViewBag.townshipList, "請選擇", new { })
+                @Html.TextBoxFor(m => m.Address_Detail)
+            </td>
+        </tr>
+        <!--手機-->
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.MobilePhone)
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.MobilePhone)
+            </td>
+        </tr>
+        <!--備註-->
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.Memo)
+            </th>
+            <td>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+                @Html.TextAreaFor(m => m.Memo)
+            </td>
+        </tr>
+    </table>
+}
+<div>
+    <div style="display:inline-block; border: 1px solid black;height:120px;overflow:auto">
+        <span>個資收集條款個資收集條款個資收集條款個資收集條款個資收集條款</span>
+        <br />
+        <span>一、資收集條款個資收集條款個資收集條款個資收集條款個資收集條款</span>
+        <br />
+        <span>二、收集條款個資收集條款個資收集條款個資收集條款個資收集條款</span>
+        <br />
+        <span>三、收集條款個資收集條款個資收集條款個資收集條款個資收集條款</span>
+        <br />
+        <span>四、收集條款個資收集條款個資收集條款個資收集條款個資收集條款</span>
+        <br />
+        <span>四、收集條款個資收集條款個資收集條款個資收集條款個資收集條款</span>
+        <br />
+        <span>四、收集條款個資收集條款個資收集條款個資收集條款個資收集條款</span>
+        <br />
+        <span>四、收集條款個資收集條款個資收集條款個資收集條款個資收集條款</span>
+        <br />
+        <span>四、收集條款個資收集條款個資收集條款個資收集條款個資收集條款</span>
+    </div>
+    <div>
+        <input type="checkbox" id="agreement" onchange="changeSubmitButton($(this).is(':checked'));" />
+        <span>我已閱讀並同意上述條款</span>
+    </div>
+</div>
+<div>
+    <div>
+        <input id="submitButton" type="button" onclick="$('#registerForm').submit()" value="確認送出" disabled />
+        <input type="button" value="重填" />
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        // 改變日期下拉選單的天數
+        function ChangeDayDropdownList() {
+            // 先清除日期選單除了default option外的所有選項
+            $.each($('#Birthday_Day').find('option'), function (index, data) {
+                if (index > 0)
+                    $(data).remove();
+            });
+
+            var year = $('#Birthday_Year').val();
+            var month = $('#Birthday_Month').val();
+
+            // 年份及日期皆有選擇，才會進入準備取得日期選單的value
+            if (year != '' && month != '') {
+                var dayDropdownList = $('#Birthday_Day');
+
+
+                // 發ajax向server端取得對應年月的日期天數
+                $.ajax({
+                    url: '@Url.Action("GetMaxDayByYearAndMonth", "Account")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        year: year,
+                        month: month
+                    },
+                    success: function (maxDay) {
+                        if (maxDay > 0) {
+                            // 取得最大天數後逐一製成選項放上選單中
+                            for (var i = 1; i <= maxDay ; i++) {
+                                var option = new Option(i.toString(), i.toString());
+                                dayDropdownList.append(option);
+                            }
+                        }
+                    },
+                    erroe: function () {
+                        alert("Network Error!");
+                    }
+                })
+            }
+        }
+
+        // 勾選同意條款後將確認送出按鈕enable
+        function changeSubmitButton(isChecked) {
+            $('#submitButton').attr("disabled", isChecked ? null : "disabled");
+        }
+
+        // 縣市下拉選單選取後發ajax取得對應的區選單
+        function ChangeTownshipDropdownList(countyId) {
+            if (countyId > 0) {
+                $.each($('#Address_Township').find('option'), function (index, data) {
+                    if (index > 0)
+                        $(data).remove();
+                });
+                $.ajax({
+                    url: '@Url.Action("GetTownshipList", "Account")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        countyId: countyId
+                    },
+                    success: function (townshipList) {
+                        var townshipDropdownList = $('#Address_Township');
+
+                        $.each(townshipList, function (index, data) {
+                            var option = new Option(data.CodeName, data.Code);
+                            townshipDropdownList.append(option);
+                        })
+                    },
+                    erroe: function () {
+                        alert("Network Error!");
+                    }
+                })
+            }
+        }
+
+
+    </script>
 }

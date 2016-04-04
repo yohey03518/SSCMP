@@ -1,0 +1,50 @@
+﻿<div>
+    <label id="coach">
+        <input type="radio" name="type" value="coach" checked /><span>找教練</span>
+    </label>
+    <label id="student">
+        <input type="radio" name="type" value="student" /><span>找學生</span>
+    </label>
+</div>
+<div>
+    <label>
+        <input type="radio" name="sex" checked /><span>不拘</span>
+    </label>
+    <label id="male">
+        <input type="radio" name="sex" /><span>找男教練</span>
+    </label>
+    <label id="female">
+        <input type="radio" name="sex" /><span>找女教練</span>
+    </label>
+</div>
+<div id="areaTree" class="areaTreeView">
+
+</div>
+<div>
+    <input type="button" value="地區reset" />
+    <input type="button" value="GO" />
+</div>
+<script type="text/javascript">
+    $(function () {
+        // 發ajax以取得地區查詢的資料並放上tree
+        $.ajax({
+            'url': '@Url.Action("GetAreaTreeData", "Home")',
+            'type': "POST",
+            'dataType': 'json',
+            'success': function (data) {
+                $('#areaTree').jstree({
+                    'core': {
+                        'data': data
+                    },
+                    'plugins': ["wholerow", "checkbox", "json_data"],
+                });
+            }
+        });
+
+        // 找教練/學生代換選項事件
+        $('input[type=radio][name=type]').change(function () {
+            $('#male span').text("找男" + $(this).parent().find('span').text().substring(1, 3));
+            $('#female span').text("找女" + $(this).parent().find('span').text().substring(1, 3));
+        })
+    });
+</script>

@@ -4,43 +4,26 @@
 
 <div id="father">
     <div class="leftDiv">
-        <div>
+        @*<div>
             <a href="#"><img src="~/Images/fb.png" style="width:35px; height:35px" />FB按讚</a>
-        </div>
-        <div>
-            <span class="titleWord">最新消息</span>
-            <div class="news">
-                消息1
-                <br />
-                消息2
-                <br />
-                消息2
-                <br />
-                消息2
-                <br />
-                消息2
-                <br />
-                消息2
-                <br />
-                消息2
-            </div>
-            <div class="ads">
-                <div>
-                    <span>廣告1</span>
-                </div>
-                <div>
-                    <span>廣告2</span>
-                </div>
-                <div>
-                    <span>廣告3</span>
-                </div>
-                <div>
-                    <span>廣告4</span>
-                </div>
-            </div>
+        </div>*@
+        <div id="searchLocation">
+            <div class="titleWordDiv"><span class="titleWord">地區搜尋</span></div>
+            <hr />
+            @{Html.RenderAction("AreaSearch", "Home", new { });}
         </div>
     </div>
     <div class="centerDiv">
+        <!--刊登學游泳 / 當教練 按鈕區塊-->
+        <div id="quickSearchArea">
+            <button>刊登學游泳</button>
+            <button>刊登當教練</button>
+        </div>
+        <div class="NewPost">
+            @{Html.RenderAction("NewPost", "Home", new { });}
+        </div>
+    </div>
+    <div class="rightDiv">
         <div id="searchArea">
             <div class="titleWordDiv"><span class="titleWord">快速查詢</span></div>
             <hr />
@@ -48,17 +31,9 @@
             <button>找教練</button>
             <button>找學生</button>
         </div>
-        <div id="searchLocation">
-            <div class="titleWordDiv"><span class="titleWord">地區搜尋</span></div>
-            <hr />
-
-
-        </div>
     </div>
-    <div class="rightDiv">
-    </div>
-    <div id="test" style="top:100px;left:10px;background-color:blue;border:2px solid red; position:fixed;width:150px;height:150px;">12345</div>
-
+    <!--浮動區塊<div id="test" style="top:100px;left:10px;background-color:blue;border:2px solid red; position:fixed;width:150px;height:150px;">12345</div>
+        -->
 </div>
 @section scripts {
     <script type="text/javascript">

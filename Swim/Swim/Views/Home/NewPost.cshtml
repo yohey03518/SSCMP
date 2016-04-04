@@ -1,0 +1,34 @@
+﻿
+<div>
+    <div>
+        <h2>最新刊登</h2>
+        <span>找教練</span>/<span>找學生</span>
+    </div>
+    <table id="grid"></table>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        GetNewPostGrid();
+    })
+
+    function GetNewPostGrid() {
+        $('#grid').jqGrid({
+            url: '@Url.Action("QueryNewPost", "Home")',
+            postData: { test: "ddd" },
+            datatype: 'json',
+            mtype: 'POST',
+            colModel: [
+                { label: 'ID', name: 'UserId', width: '60px' },
+                { label: '性別', name: 'Sex', width: '60px' },
+                { label: '地區', name: 'Area', width: '60px' },
+                { label: '備註', name: 'Memo', width: '60px' }
+            ],
+            shrinkToFit: false,
+            loadComplete: function (data) {
+                console.log(data);
+            }
+        })
+
+    }
+</script>
