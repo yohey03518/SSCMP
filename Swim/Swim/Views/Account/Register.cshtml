@@ -4,7 +4,13 @@
 }
 
 <h1>申請帳號</h1>
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm" }))
+@using (Ajax.BeginForm("Registerr", "Account", new AjaxOptions
+{
+    HttpMethod = "POST",
+    OnSuccess = "ajaxResult(data);",
+    OnFailure = "ajaxResult(data);"
+},
+    new { id = "registerForm" }))
 {
     @Html.AntiForgeryToken()
     <table>
@@ -14,8 +20,15 @@
                 <span>我要當</span>
             </th>
             <td>
-                <label><input type="radio" name="Role" value="Coach" />教練</label>
-                <label><input type="radio" name="Role" value="Student" />學生</label>
+                <label>
+                    @Html.RadioButtonFor(m => m.Role, "Coach")
+                    教練
+                </label>
+                <label>
+                    @Html.RadioButtonFor(m => m.Role, "Student")
+                    學生
+                </label>
+                @Html.ValidationMessageFor(m => m.Role)
             </td>
         </tr>
         <!--帳號-->
@@ -25,6 +38,7 @@
             </th>
             <td>
                 @Html.TextBoxFor(m => m.UserId)
+                @Html.ValidationMessageFor(m => m.UserId)
             </td>
         </tr>
         <!--密碼-->
@@ -34,15 +48,17 @@
             </th>
             <td>
                 @Html.PasswordFor(m => m.LoginPassword)
+                @Html.ValidationMessageFor(m => m.LoginPassword)
             </td>
         </tr>
         <!--再次輸入密碼-->
         <tr>
             <th>
-                @Html.Label("密碼確認")
+                @Html.LabelFor(m => m.LoginPasswordConfirmation)
             </th>
             <td>
-                @Html.TextBox("dddd")
+                @Html.PasswordFor(m => m.LoginPasswordConfirmation)
+                @Html.ValidationMessageFor(m => m.LoginPasswordConfirmation)
             </td>
         </tr>
         <!--性別-->
@@ -51,8 +67,15 @@
                 @Html.LabelFor(m => m.Sex)
             </th>
             <td>
-                <label><input type="radio" name="Sex" value="Male" />男生</label>
-                <label><input type="radio" name="Sex" value="Female" />女生</label>
+                <label>
+                    @Html.RadioButtonFor(m => m.Sex, "M")
+                    男生
+                </label>
+                <label>
+                    @Html.RadioButtonFor(m => m.Sex, "F")
+                    女生
+                </label>
+                @Html.ValidationMessageFor(m => m.Sex)
             </td>
         </tr>
         <!--生日-->
@@ -68,6 +91,9 @@
                 <span>月 </span>
                 @Html.DropDownListFor(m => m.Birthday_Day, (SelectList)ViewBag.dayList, "請選擇")
                 <span>日</span>
+                @Html.ValidationMessageFor(m => m.Birthday_Year)
+                @Html.ValidationMessageFor(m => m.Birthday_Month)
+                @Html.ValidationMessageFor(m => m.Birthday_Day)
             </td>
         </tr>
         <!--電子信箱-->
@@ -77,6 +103,7 @@
             </th>
             <td>
                 @Html.TextBoxFor(m => m.EmailAddress)
+                @Html.ValidationMessageFor(m => m.EmailAddress)
             </td>
         </tr>
         <!--地址-->
@@ -88,6 +115,8 @@
                 @Html.DropDownListFor(m => m.Address_County, (SelectList)ViewBag.countyList, "請選擇", new { onchange = "ChangeTownshipDropdownList($(this).val());" })
                 @Html.DropDownListFor(m => m.Address_Township, (SelectList)ViewBag.townshipList, "請選擇", new { })
                 @Html.TextBoxFor(m => m.Address_Detail)
+                @Html.ValidationMessageFor(m => m.Address_County)
+                @Html.ValidationMessageFor(m => m.Address_Township)
             </td>
         </tr>
         <!--手機-->
@@ -97,6 +126,7 @@
             </th>
             <td>
                 @Html.TextBoxFor(m => m.MobilePhone)
+                @Html.ValidationMessageFor(m => m.MobilePhone)
             </td>
         </tr>
         <!--備註-->
@@ -105,8 +135,8 @@
                 @Html.LabelFor(m => m.Memo)
             </th>
             <td>
-
                 @Html.TextAreaFor(m => m.Memo)
+                @Html.ValidationMessageFor(m => m.Memo)
             </td>
         </tr>
     </table>
@@ -145,6 +175,10 @@
 
 @section scripts{
     <script type="text/javascript">
+
+        $.validator.setDefaults({
+            onkeyup: false
+        });
 
         // 改變日期下拉選單的天數
         function ChangeDayDropdownList() {
@@ -221,6 +255,14 @@
             }
         }
 
-
+        function ajaxResult(data) {
+            if (data == 'SUCCESS') {
+                alert("帳號建立成功！請回到首頁進行登入");
+                document.location.replace('@Url.Action("Index", "Home")');
+            }
+            else {
+                alert(data);
+            }
+        }
     </script>
 }

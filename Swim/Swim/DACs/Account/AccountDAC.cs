@@ -48,7 +48,50 @@ namespace Swim.DAC
             return dbConn.ExecuteQuery<CommonCodeModel>(sql.ToString(), countyId).ToList();
         }
 
+        /// <summary>
+        /// 新增帳號資料
+        /// </summary>
+        /// 2016/04/05 by Yohey
+        /// <param name="newAccountModel"></param>
+        public void CreateNewAccount(RegisterDataModel newAccountModel)
+        {
+            // 組合生日日期
+            string birthday = newAccountModel.Birthday_Year + "/" + newAccountModel.Birthday_Month + "/" + newAccountModel.Birthday_Day;
 
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine(@"
+                INSERT INTO AccountData
+                    (Role, UserId, LoginPassword, Sex, Birthday,
+                     EmailAddress, Address_County, Address_Township, Address_Detail, MobilePhone,
+                     Memo, CreateDate)
+                VALUES 
+                    ({0}, {1}, {2}, {3}, CONVERT(DATETIME, {4}),
+                     {5}, CONVERT(INT, {6}), CONVERT(INT, {7}), {8}, {9},
+                     {10}, GETDATE())
+            ");
+            dbConn.ExecuteCommand(sql.ToString(),
+                newAccountModel.Role, newAccountModel.UserId, newAccountModel.LoginPassword, newAccountModel.Sex, birthday,
+                newAccountModel.EmailAddress, newAccountModel.Address_County, newAccountModel.Address_Township, newAccountModel.Address_Detail ?? "", newAccountModel.MobilePhone,
+                newAccountModel.Memo ?? "");
+        }
+
+        /// <summary>
+        /// 驗證是否傳入的使用者ID已經被使用過
+        /// </summary>
+        /// 2016/04/05 by Yohey
+        /// <param name="userId"></param>
+        /// <returns>true:有被使用過; false:無使用過</returns>
+        public bool IsUserIdBeUsed(string userId)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine(@"
+                SELECT COUNT(*)
+                FROM AccountData
+                WHERE UserId = {0}
+            ");
+            int count = dbConn.ExecuteQuery<int>(sql.ToString(), userId).SingleOrDefault();
+            return count > 0 ? true : false;
+        }
     }
 
 }

@@ -13,7 +13,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Swim.DAC;
 using System.Configuration;
-using System.Web.Security;
 using System.Text;
 
 namespace Swim.Controllers
@@ -118,18 +117,47 @@ namespace Swim.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterDataModel newAccountModel)
+        public JsonResult Registerr(RegisterDataModel newAccountModel)
         {
-
+            // 密碼加密
             newAccountModel.LoginPassword = Hash(newAccountModel.LoginPassword);
-            bool iftrue;
-            if (newAccountModel.LoginPassword == Hash("abcde"))
-                iftrue = true;
-            else
-                iftrue = false;
 
+            // 避免角色被亂改
+            if (newAccountModel.Role != "Coach" && newAccountModel.Role != "Student")
+                return Json("Wrong Role");
 
-            return View();
+            try
+            {
+                using(AccountDAC dac = new AccountDAC())
+                {
+                    dac.CreateNewAccount(newAccountModel);
+                }
+                return Json("SUCCESS");
+            }
+            catch
+            {
+                return Json("帳號建立失敗！請重試");
+            }
+        }
+
+        /// <summary>
+        /// 確認User ID是否已經被使用
+        /// </summary>
+        /// 2016/04/05 by Yohey
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public JsonResult IsUserIdBeUsed(string UserId)
+        {
+            using(AccountDAC dac = new AccountDAC())
+            {
+                bool isUsed = dac.IsUserIdBeUsed(UserId);
+                // true: 有被使用,故回傳錯誤訊息 ; false:無被使用, 回傳true(通過)
+                if (isUsed)
+                    return Json("此ID已被使用", JsonRequestBehavior.AllowGet);
+                else
+                    return Json(true, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 

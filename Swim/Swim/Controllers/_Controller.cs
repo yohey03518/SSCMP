@@ -12,7 +12,7 @@ namespace Swim.Controllers
         public static string Hash(string value)
         {
             return Convert.ToBase64String(
-                System.Security.Cryptography.SHA256.Create()
+                System.Security.Cryptography.MD5.Create()
                 .ComputeHash(Encoding.UTF8.GetBytes(value)));
         }
     }
