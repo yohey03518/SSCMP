@@ -4,7 +4,7 @@
 }
 
 <h1>申請帳號</h1>
-@using (Ajax.BeginForm("Registerr", "Account", new AjaxOptions
+@using (Ajax.BeginForm("Register", "Account", new AjaxOptions
 {
     HttpMethod = "POST",
     OnSuccess = "ajaxResult(data);",
@@ -13,133 +13,117 @@
     new { id = "registerForm" }))
 {
     @Html.AntiForgeryToken()
-    <table>
-        <!--我要當 教練/學生-->
-        <tr>
-            <th>
-                <span>我要當</span>
-            </th>
-            <td>
-                <label>
-                    @Html.RadioButtonFor(m => m.Role, "Coach")
-                    教練
-                </label>
-                <label>
-                    @Html.RadioButtonFor(m => m.Role, "Student")
-                    學生
-                </label>
-                @Html.ValidationMessageFor(m => m.Role)
-            </td>
-        </tr>
-        <!--帳號-->
-        <tr>
-            <th>
-                @Html.LabelFor(m => m.UserId)
-            </th>
-            <td>
-                @Html.TextBoxFor(m => m.UserId)
-                @Html.ValidationMessageFor(m => m.UserId)
-            </td>
-        </tr>
-        <!--密碼-->
-        <tr>
-            <th>
-                @Html.LabelFor(m => m.LoginPassword)
-            </th>
-            <td>
-                @Html.PasswordFor(m => m.LoginPassword)
-                @Html.ValidationMessageFor(m => m.LoginPassword)
-            </td>
-        </tr>
-        <!--再次輸入密碼-->
-        <tr>
-            <th>
-                @Html.LabelFor(m => m.LoginPasswordConfirmation)
-            </th>
-            <td>
-                @Html.PasswordFor(m => m.LoginPasswordConfirmation)
-                @Html.ValidationMessageFor(m => m.LoginPasswordConfirmation)
-            </td>
-        </tr>
-        <!--性別-->
-        <tr>
-            <th>
-                @Html.LabelFor(m => m.Sex)
-            </th>
-            <td>
-                <label>
-                    @Html.RadioButtonFor(m => m.Sex, "M")
-                    男生
-                </label>
-                <label>
-                    @Html.RadioButtonFor(m => m.Sex, "F")
-                    女生
-                </label>
-                @Html.ValidationMessageFor(m => m.Sex)
-            </td>
-        </tr>
-        <!--生日-->
-        <tr>
-            <th>
-                @Html.Label("出生年月日")
-            </th>
-            <td>
-                <span>西元</span>
-                @Html.DropDownListFor(m => m.Birthday_Year, (SelectList)ViewBag.yearList, "請選擇", new { onchange = "ChangeDayDropdownList();" })
-                <span>年 </span>
-                @Html.DropDownListFor(m => m.Birthday_Month, (SelectList)ViewBag.monthList, "請選擇", new { onchange = "ChangeDayDropdownList();" })
-                <span>月 </span>
-                @Html.DropDownListFor(m => m.Birthday_Day, (SelectList)ViewBag.dayList, "請選擇")
-                <span>日</span>
-                @Html.ValidationMessageFor(m => m.Birthday_Year)
-                @Html.ValidationMessageFor(m => m.Birthday_Month)
-                @Html.ValidationMessageFor(m => m.Birthday_Day)
-            </td>
-        </tr>
-        <!--電子信箱-->
-        <tr>
-            <th>
-                @Html.LabelFor(m => m.EmailAddress)
-            </th>
-            <td>
-                @Html.TextBoxFor(m => m.EmailAddress)
-                @Html.ValidationMessageFor(m => m.EmailAddress)
-            </td>
-        </tr>
-        <!--地址-->
-        <tr>
-            <th>
-                @Html.Label("居住地")
-            </th>
-            <td>
-                @Html.DropDownListFor(m => m.Address_County, (SelectList)ViewBag.countyList, "請選擇", new { onchange = "ChangeTownshipDropdownList($(this).val());" })
-                @Html.DropDownListFor(m => m.Address_Township, (SelectList)ViewBag.townshipList, "請選擇", new { })
-                @Html.TextBoxFor(m => m.Address_Detail)
-                @Html.ValidationMessageFor(m => m.Address_County)
-                @Html.ValidationMessageFor(m => m.Address_Township)
-            </td>
-        </tr>
-        <!--手機-->
-        <tr>
-            <th>
-                @Html.LabelFor(m => m.MobilePhone)
-            </th>
-            <td>
-                @Html.TextBoxFor(m => m.MobilePhone)
-                @Html.ValidationMessageFor(m => m.MobilePhone)
-            </td>
-        </tr>
-        <!--備註-->
-        <tr>
-            <th>
-                @Html.LabelFor(m => m.Memo)
-            </th>
-            <td>
-                @Html.TextAreaFor(m => m.Memo)
-                @Html.ValidationMessageFor(m => m.Memo)
-            </td>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col-md-8">
+            <!--我要當 教練/學生-->
+            <div class="form-group">
+                @Html.Label("我要當", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <label>
+                        @Html.RadioButtonFor(m => m.Role, "Coach")
+                        教練
+                    </label>
+                    <label>
+                        @Html.RadioButtonFor(m => m.Role, "Student")
+                        學生
+                    </label>
+                    @Html.ValidationMessageFor(m => m.Role)
+                </div>
+            </div>
+            <!--帳號-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserId, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.UserId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserId)
+                </div>
+            </div>
+            <!--密碼-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.LoginPassword, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.LoginPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LoginPassword)
+                </div>
+            </div>
+            <!--再次輸入密碼-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.LoginPasswordConfirmation, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.LoginPasswordConfirmation, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LoginPasswordConfirmation)
+                </div>
+            </div>
+            <!--性別-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.Sex, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <label>
+                        @Html.RadioButtonFor(m => m.Sex, "M")
+                        男生
+                    </label>
+                    <label>
+                        @Html.RadioButtonFor(m => m.Sex, "F")
+                        女生
+                    </label>
+                    @Html.ValidationMessageFor(m => m.Sex)
+                </div>
+            </div>
+            <!--生日-->
+            <div class="form-group">
+                @Html.Label("出生年月日", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <div style="padding:4px">
+                        <span>西元</span>
+                        @Html.DropDownListFor(m => m.Birthday_Year, (SelectList)ViewBag.yearList, "請選擇", new { onchange = "ChangeDayDropdownList();" })
+                        <span>年 </span>
+                        @Html.DropDownListFor(m => m.Birthday_Month, (SelectList)ViewBag.monthList, "請選擇", new { onchange = "ChangeDayDropdownList();" })
+                        <span>月 </span>
+                        @Html.DropDownListFor(m => m.Birthday_Day, (SelectList)ViewBag.dayList, "請選擇")
+                        <span>日</span>
+                        @Html.ValidationMessageFor(m => m.Birthday_Year)
+                        @Html.ValidationMessageFor(m => m.Birthday_Month)
+                        @Html.ValidationMessageFor(m => m.Birthday_Day)
+                    </div>
+                </div>
+            </div>
+            <!--電子信箱-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.EmailAddress, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.EmailAddress)
+                </div>
+            </div>
+            <!--地址-->
+            <div class="form-group">
+                @Html.Label("居住地", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Address_County, (SelectList)ViewBag.countyList, "請選擇", new { onchange = "ChangeTownshipDropdownList($(this).val());" })
+                    @Html.DropDownListFor(m => m.Address_Township, (SelectList)ViewBag.townshipList, "請選擇", new { })
+                    @Html.TextBoxFor(m => m.Address_Detail, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address_County)
+                    @Html.ValidationMessageFor(m => m.Address_Township)
+                </div>
+            </div>
+            <!--手機-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.MobilePhone, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.MobilePhone, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MobilePhone)
+                </div>
+            </div>
+            <!--備註-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.Memo, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.Memo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Memo)
+                </div>
+            </div>
+        </div>
+    </div>
 }
 <div>
     <div style="display:inline-block; border: 1px solid black;height:120px;overflow:auto">

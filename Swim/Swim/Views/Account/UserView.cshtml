@@ -1,0 +1,55 @@
+﻿@model Swim.Models.UserInfoModel
+@{
+    ViewBag.Title = "會員個人資料";
+}
+
+
+
+<div class="row">
+    <!--會員ID-->
+    <div class="col-md-8">
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserId)
+            <span>
+                @Html.DisplayFor(m => m.UserId)
+            </span>
+        </div>
+    <!--角色-->
+        <div class="form-group">
+            @Html.LabelFor(m => m.Role_View)
+            <span>
+                @Html.DisplayFor(m => m.Role_View)
+            </span>
+        </div>
+    <!--性別-->
+        <div class="form-group">
+            @Html.LabelFor(m => m.Sex_View)
+            <span>
+                @Html.DisplayFor(m => m.Sex_View)
+            </span>
+        </div>
+    <!--生日-->
+        <div class="form-group">
+            @Html.LabelFor(m => m.Birthday_View)
+            <span>
+                @Html.DisplayFor(m => m.Birthday_View)
+            </span>
+        </div>
+    <!--居住地-->
+        <div class="form-group">
+            @Html.Label("居住地")
+            <span>
+                @Html.DisplayFor(m => m.Address_County)
+                &nbsp;
+                @Html.DisplayFor(m => m.Address_Township)
+            </span>
+        </div>
+    <!--備註-->
+        <div class="form-group">
+            @Html.LabelFor(m => m.Memo)
+            <span>
+                @Html.DisplayFor(m => m.Memo)
+            </span>
+        </div>
+    </div>
+</div>

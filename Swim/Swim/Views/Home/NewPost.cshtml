@@ -1,16 +1,41 @@
-﻿
-<div>
-    <div>
-        <h2>最新刊登</h2>
-        <span>找教練</span>/<span>找學生</span>
+﻿<h2>最新刊登</h2>
+<div class="abgne_tab">
+    <ul class="tabs">
+        <li><a href="#findCoach_tab">找教練</a></li>
+        <li><a href="#findStudent_tab">找學生</a></li>
+    </ul>
+    <div class="tab_container">
+        <div id="findCoach_tab" class="tab_content">
+            <table id="grid"></table>
+        </div>
+        <div id="findStudent_tab" class="tab_content">
+
+            <span>12121212</span>
+        </div>
     </div>
-    <table id="grid"></table>
+
 </div>
 
 <script type="text/javascript">
     $(function () {
+        InitNewPostTab();
         GetNewPostGrid();
     })
+
+    function InitNewPostTab() {
+        var $defaultLi = $('ul.tabs li').eq(0).addClass('active');
+        $($defaultLi.find('a').attr('href')).siblings().hide();
+
+        $('ul.tabs li').mouseover(function () {
+            var $thisItem = $(this);
+            var _clickTab = $thisItem.find('a').attr('href');
+            $thisItem.addClass('active').siblings('.active').removeClass('active');
+            $(_clickTab).stop(false, true).fadeIn().siblings().hide();
+            return false;
+        }).find('a').focus(function () {
+            this.blur();
+        })
+    }
 
     function GetNewPostGrid() {
         $('#grid').jqGrid({
@@ -19,7 +44,7 @@
             datatype: 'json',
             mtype: 'POST',
             colModel: [
-                { label: 'ID', name: 'UserId', width: '60px' },
+                { label: 'ID', name: 'UserId', width: '60px', formatter: LinkToUserData },
                 { label: '性別', name: 'Sex', width: '60px' },
                 { label: '地區', name: 'Area', width: '60px' },
                 { label: '備註', name: 'Memo', width: '60px' }
@@ -28,4 +53,68 @@
         })
 
     }
+
+    function LinkToUserData(cellvalue, options, rowObject) {
+        return "<a href='#' onclick='window.open(\"@Url.Action("UserView", "Account")/?userId=" + cellvalue + "\")'>" + cellvalue + "</a>";
+    }
 </script>
+<style>
+    ul, li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .abgne_tab {
+        clear: left;
+        width: 250px;
+        margin: 10px 0;
+    }
+
+    ul.tabs {
+        width: 100%;
+        height: 32px;
+        border-bottom: none;
+        border-left: 1px solid #999;
+    }
+
+        ul.tabs li {
+            float: left;
+            height: 31px;
+            line-height: 31px;
+            overflow: hidden;
+            border-bottom: -1px;
+            border: 1px solid #999;
+            border-left: none;
+            background: #e1e1e1;
+        }
+
+            ul.tabs li a {
+                display: block;
+                padding: 0 20px;
+                color: #000;
+                border: 1px solid #fff;
+                text-decoration: none;
+            }
+
+            ul.tabs li.active {
+                background: #fff;
+                border-bottom: 1px solid #fff;
+            }
+
+    div.tab_container {
+        clear: left;
+        width: 100%;
+        border: 1px solid #999;
+        border-top: none;
+        background: #fff;
+    }
+
+        div.tab_container .tab_content {
+            padding: 20px;
+        }
+
+            div.tab_container .tab_content h2 {
+                margin: 0 0 20px;
+            }
+</style>

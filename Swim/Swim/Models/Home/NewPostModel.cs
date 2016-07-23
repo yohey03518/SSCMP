@@ -10,6 +10,11 @@ namespace Swim.Models
     public class NewPostModel
     {
         /// <summary>
+        /// 刊登ID
+        /// </summary>
+        public int PostId { get; set; }
+
+        /// <summary>
         /// 使用者ID
         /// </summary>
         public string UserId { get; set; }
@@ -18,6 +23,22 @@ namespace Swim.Models
         /// 性別
         /// </summary>
         public string Sex { get; set; }
+        public string Sex_Text
+        {
+            get
+            {
+                if (this.Sex == "M")
+                    return "女";
+                else if (this.Sex == "F")
+                    return "男";
+                else
+                    return "";                
+            }
+            set
+            {
+
+            }
+        }
 
         /// <summary>
         /// 地區
@@ -28,6 +49,5 @@ namespace Swim.Models
         /// 備註
         /// </summary>
         public string Memo { get; set; }
-
     }
 }

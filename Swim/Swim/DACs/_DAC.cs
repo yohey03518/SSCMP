@@ -3,6 +3,7 @@ using System.Linq;
 using System.Data.Linq;
 using Swim.Models;
 using System.Configuration;
+using System.Text;
 
 namespace Swim.DAC
 {

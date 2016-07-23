@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Swim.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : _Controller
     {
         public ActionResult Index()
         {
@@ -40,7 +40,7 @@ namespace Swim.Controllers
         /// <returns></returns>
         public ActionResult NewPost()
         {
-            return View();
+            return PartialView();
         }
 
         /// <summary>
@@ -51,38 +51,32 @@ namespace Swim.Controllers
         [HttpPost]
         public JsonResult QueryNewPost(string test)
         {
-            NewPostModel model1 = new NewPostModel()
+            using (PostDAC dac = new PostDAC())
             {
-                UserId = "yohey",
-                Sex = "男",
-                Area = "高雄市",
-                Memo = "我想睡覺"
-            };
-            IList<NewPostModel> testList = new List<NewPostModel>();
-            testList.Add(model1);
-            testList.Add(model1);
-            int total = 2;
-            int page = 1;
-            int records = 2;
-            var gridData = new
-            {
-                total,
-                page,
-                records,
-                rows = (from obj in testList
-                        select new
-                        {
-                            cell = new
-                            {
-                                UserId = obj.UserId,
-                                Sex = obj.Sex,
-                                Area = obj.Area,
-                                Memo = obj.Memo
-                            }
+                IList<NewPostModel> list = dac.GetTop5NewStudentPost();
 
-                        })
-            };
-            return Json(gridData);
+                int total = 2;
+                int page = 1;
+                int records = 2;
+                var gridData = new
+                {
+                    total,
+                    page,
+                    records,
+                    rows = (from obj in list
+                            select new
+                            {
+                                cell = new
+                                {
+                                    UserId = obj.UserId,
+                                    Sex = obj.Sex_Text,
+                                    Area = obj.Area
+                                }
+
+                            })
+                };
+                return Json(gridData);
+            }
         }
 
         /// <summary>

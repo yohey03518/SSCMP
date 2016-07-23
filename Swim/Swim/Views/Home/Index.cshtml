@@ -2,73 +2,72 @@
     ViewBag.Title = "e起學游泳";
 }
 
-<div id="father">
-    <div class="leftDiv">
+<div class="row">
+    <div class="col-md-4">
         @*<div>
-            <a href="#"><img src="~/Images/fb.png" style="width:35px; height:35px" />FB按讚</a>
-        </div>*@
-        <div id="searchLocation">
+                <a href="#"><img src="~/Images/fb.png" style="width:35px; height:35px" />FB按讚</a>
+            </div>*@
+        <div>
             <div class="titleWordDiv"><span class="titleWord">地區搜尋</span></div>
             <hr />
-            @{Html.RenderAction("AreaSearch", "Home", new { });}
+            @{Html.RenderAction("AreaSearch", "Home", new { id = "areaTree" });}
         </div>
     </div>
-    <div class="centerDiv">
+    <div class="col-md-4">
         <!--刊登學游泳 / 當教練 按鈕區塊-->
         <div id="quickSearchArea">
-            <button>刊登學游泳</button>
-            <button>刊登當教練</button>
+            <button onclick="document.location.href = '@Url.Action("NewPostToLearn", "Post", "")';">刊登學游泳</button>
+            <button onclick="document.location.replace('@Url.Action("NewPostToTeach", "Post", "")')">刊登當教練</button>
         </div>
         <div class="NewPost">
-            @{Html.RenderAction("NewPost", "Home", new { });}
+            @{Html.RenderAction("NewPost", "Home");}
         </div>
     </div>
-    <div class="rightDiv">
-        <div id="searchArea">
+    <div class="col-md-4">
+        <div >
             <div class="titleWordDiv"><span class="titleWord">快速查詢</span></div>
             <hr />
-            @Html.TextBox("searchBox", "請輸入關鍵字", new { @class = "searchBox", width = "80px" })
+            @Html.TextBox("searchBox", "", new { @class = "searchBox", width = "80px", placeHolder = "請輸入關鍵字" })
             <button>找教練</button>
             <button>找學生</button>
         </div>
     </div>
-    <!--浮動區塊<div id="test" style="top:100px;left:10px;background-color:blue;border:2px solid red; position:fixed;width:150px;height:150px;">12345</div>
-        -->
 </div>
+@*<div id="father">
+        <div class="leftDiv">
+            @*<div>
+                <a href="#"><img src="~/Images/fb.png" style="width:35px; height:35px" />FB按讚</a>
+            </div>*
+            <div id="searchLocation">
+                <div class="titleWordDiv"><span class="titleWord">地區搜尋</span></div>
+                <hr />
+                @{Html.RenderAction("AreaSearch", "Home", new { });}
+            </div>
+        </div>
+        <div class="centerDiv">
+            <!--刊登學游泳 / 當教練 按鈕區塊-->
+            <div id="quickSearchArea">
+                <button>刊登學游泳</button>
+                <button>刊登當教練</button>
+            </div>
+            <div class="NewPost">
+                @{Html.RenderAction("NewPost", "Home", new { });}
+            </div>
+        </div>
+        <div class="rightDiv">
+            <div id="searchArea">
+                <div class="titleWordDiv"><span class="titleWord">快速查詢</span></div>
+                <hr />
+                @Html.TextBox("searchBox", "", new { @class = "searchBox", width = "80px", placeHolder = "請輸入關鍵字" })
+                <button>找教練</button>
+                <button>找學生</button>
+            </div>
+        </div>
+    </div>*@
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            $('#searchBox').focus(function () {
-                if ($('#searchBox').val() == '請輸入關鍵字')
-                    $('#searchBox').val("");
-            });
-            $('#searchBox').blur(function () {
-                if ($('#searchBox').val() == '')
-                    $('#searchBox').val('請輸入關鍵字');
-            })
-            //滑鼠按下時加上移動時的事件
-            $("#test").mousedown(function () {
-                mouseX = event.clientX;
-                mouseY = event.clientY;
-                $("#test").mousemove(function () {
-                    var element = $("#test");
-                    var X = element.offset()['top'] + event.clientY - mouseY;
-                    var Y = element.offset()['left'] + event.clientX - mouseX;
-                    element.offset({
-                        top: X,
-                        left: Y
-                    });
-                    mouseX = event.clientX;
-                    mouseY = event.clientY;
-                })
-            })
-            $("#test").mouseup(function () {
-                $("#test").off("mousemove");
-            })
-
         });
-        var mouseX;
-        var mouseY;
 
 
     </script>

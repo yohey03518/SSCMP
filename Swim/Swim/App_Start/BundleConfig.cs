@@ -32,9 +32,12 @@ namespace Swim
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/style.min.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css",
+                      "~/Content/jquery.jqGrid/ui.jqgrid.css",
+                      "~/Content/themes/base/jquery*",
+                      "~/Content/ComCss.css"));
         }
     }
 }

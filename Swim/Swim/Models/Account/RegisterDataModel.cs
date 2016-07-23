@@ -96,6 +96,7 @@ namespace Swim.Models
         /// 地址 - 其餘詳細
         /// </summary>
         [StringLength(100, ErrorMessage="長度限制為100字內")]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Address_Detail { get; set; }
 
         /// <summary>

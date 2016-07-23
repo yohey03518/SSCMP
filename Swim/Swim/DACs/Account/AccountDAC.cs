@@ -92,6 +92,43 @@ namespace Swim.DAC
             int count = dbConn.ExecuteQuery<int>(sql.ToString(), userId).SingleOrDefault();
             return count > 0 ? true : false;
         }
+
+        /// <summary>
+        /// 依照登入的ID取得該帳號的密碼(已加密)
+        /// </summary>
+        /// 2016/04/10 by Yohey
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public string GetPasswordByUserId(string userId)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine(@"
+                SELECT LoginPassword
+                FROM AccountData
+                WHERE UserId = {0}
+            ");
+            return dbConn.ExecuteQuery<string>(sql.ToString(), userId).SingleOrDefault();
+        }
+
+        /// <summary>
+        /// 取得會員資料
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public UserInfoModel GetUserData(string userId)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine(@"
+                SELECT USR.UserId, USR.Role, USR.Sex, USR.Birthday, COUNTY.AreaName AS Address_County, TOWNSHIP.AreaName AS Address_Township, USR.Memo
+                FROM AccountData AS USR
+	                LEFT JOIN AreaData COUNTY
+		                ON USR.Address_County = COUNTY.AreaId
+	                LEFT JOIN AreaData TOWNSHIP
+		                ON USR.Address_Township = TOWNSHIP.AreaId
+                WHERE USR.UserId = {0}
+            ");
+            return dbConn.ExecuteQuery<UserInfoModel>(sql.ToString(), userId).SingleOrDefault();
+        }
     }
 
 }

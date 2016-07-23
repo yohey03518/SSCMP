@@ -1,0 +1,26 @@
+﻿
+<div id="@ViewBag.treeId" class="areaTreeView">
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        // 發ajax以取得地區查詢的資料並放上tree
+        $.ajax({
+            'url': '@Url.Action("GetAreaTreeData", "Home")',
+            'type': "POST",
+            'dataType': 'json',
+            'success': function (data) {
+                $('#@ViewBag.treeId').jstree({
+                    'core': {
+                        'data': data,
+                        'themes': {
+                            'icons': false
+                        }
+                    },
+                    
+                    'plugins': ["wholerow", "checkbox", "json_data"],
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,21 @@
+﻿
+<div id="@ViewBag.treeId" class="areaTreeView">
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            'url': '@Url.Action("GetLearnTypeData", "Com")',
+            'type': "POST",
+            'dataType': 'json',
+            'success': function (data) {
+                $('#@ViewBag.treeId').jstree({
+                    'core': {
+                        'data': data
+                    },
+                    'plugins': ["wholerow", "checkbox", "json_data"],
+                });
+            }
+        });
+    });
+</script>

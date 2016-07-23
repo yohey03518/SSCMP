@@ -1,0 +1,103 @@
+﻿@model Swim.Models.NewPostToLearnModel
+@{
+    ViewBag.Title = "刊登學游泳";
+}
+
+<h2>我要學游泳</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        @using (Ajax.BeginForm("ToLearnPostSave", "Post", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnSuccess = "ajaxResult(data);",
+            OnFailure = "ajaxResult(data);"
+        },
+            new { id = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <!--希望上課地點-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.HopeArea, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @{Html.RenderAction("AreaTree", "Com", new { id = "areaTree" });}
+                    @Html.HiddenFor(m => m.HopeArea)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.HopeCoachSex, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <label>
+                        @Html.RadioButtonFor(m => m.HopeCoachSex, "N", new { @checked = "checked" })
+                        不拘
+                    </label>
+                    <label>
+                        @Html.RadioButtonFor(m => m.HopeCoachSex, "M")
+                        男生
+                    </label>
+                    <label>
+                        @Html.RadioButtonFor(m => m.HopeCoachSex, "F")
+                        女生
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ToLearnType, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @{Html.RenderAction("LearnTypeTree", "Com", new { id = "learnTypeTree" });}
+                    @Html.HiddenFor(m => m.ToLearnType)
+                </div>
+            </div>
+            <!--備註-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.Memo, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.Memo, new { @class = "form-control" })
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="刊登" class="btn btn-default" onclick="LearnPostSubmit()" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+        });
+
+        function LearnPostSubmit() {
+            var areaData = $('#areaTree').jstree('get_selected');
+            // 驗證是否有選擇地區
+            if (areaData.length == 0) {
+                alert("請至少選擇一個地區")
+                return;
+            }
+            $('#HopeArea').val(areaData);
+
+            // 驗證是否有選擇學習類型
+            var learnTypeData = $('#learnTypeTree').jstree('get_selected');
+            if (learnTypeData.length == 0) {
+                alert("請至少選擇一個想學習的類型")
+                return;
+            }
+            $('#ToLearnType').val(learnTypeData);
+
+            //送出存檔
+            $('#form').submit();
+        }
+
+        function ajaxResult(data) {
+            if (data == 'SUCCESS') {
+                alert("刊登成功！將回到首頁");
+                document.location.replace('@Url.Action("Index", "Home")');
+            }
+            else {
+                alert(data);
+            }
+        }
+    </script>
+}
