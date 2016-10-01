@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SSCMP.Models;
+using SCCMP.Service.Interface;
 
 namespace SSCMP.Controllers
 {
@@ -17,6 +18,14 @@ namespace SSCMP.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        // Test Spring Framwork -----------
+        private TestInterface _testInterface;
+        public AccountController(TestInterface test)
+        {
+            this._testInterface = test;
+        }
+        //----------------------------------
 
         public AccountController()
         {

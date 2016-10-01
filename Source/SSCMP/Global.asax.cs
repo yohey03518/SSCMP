@@ -8,9 +8,9 @@ using System.Web.Routing;
 
 namespace SSCMP
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : Spring.Web.Mvc.SpringMvcApplication //  System.Web.HttpApplication
     {
-        protected void Application_Start()
+        protected override void Application_Start(object sender, EventArgs e)
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

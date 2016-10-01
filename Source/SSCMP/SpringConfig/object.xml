@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+  <objects xmlns="http://www.springframework.net">
+  <object id="account" type="SSCMP.Controllers.AccountController , SSCMP"  singleton="false">
+    <constructor-arg ref="testService" /> 
+  </object>
+  <object id="testService" type="SCCMP.Service.Service.TestService , SCCMP.Service"/>
+  <object id ="home" type="SSCMP.Controllers.HomeController , SSCMP" singleton="false"/>
+</objects>
+
+
