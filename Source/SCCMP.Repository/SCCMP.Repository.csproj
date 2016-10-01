@@ -40,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\TestRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SCCMP.Domain\SCCMP.Domain.csproj">
@@ -50,7 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interface\" />
-	<Folder Include="Repository\" />  </ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
