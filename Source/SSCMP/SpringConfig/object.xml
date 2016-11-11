@@ -1,10 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-  <objects xmlns="http://www.springframework.net">
+<objects xmlns="http://www.springframework.net">
+  <!--Controller-->
   <object id="account" type="SSCMP.Controllers.AccountController , SSCMP"  singleton="false">
-    <constructor-arg ref="testService" /> 
+    <constructor-arg ref="testService" />
   </object>
-  <object id="testService" type="SCCMP.Service.Service.TestService , SCCMP.Service"/>
   <object id ="home" type="SSCMP.Controllers.HomeController , SSCMP" singleton="false"/>
+  <!--Service-->
+  <object id="testService" type="SCCMP.Service.TestService , SCCMP.Service" singleton="false">
+    <constructor-arg ref="employeeRepository" />
+  </object>
+  <!--Repository-->
+  <object id="employeeRepository" type="SCCMP.Repository.EmployeeRepository , SCCMP.Repository" singleton="false"/>
 </objects>
 
 

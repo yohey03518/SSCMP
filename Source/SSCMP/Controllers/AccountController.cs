@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SSCMP.Models;
-using SCCMP.Service.Interface;
+using SCCMP.Service;
 
 namespace SSCMP.Controllers
 {
@@ -20,10 +20,10 @@ namespace SSCMP.Controllers
         private ApplicationUserManager _userManager;
 
         // Test Spring Framwork -----------
-        private TestInterface _testInterface;
-        public AccountController(TestInterface test)
+        private ITestService _testInterface;
+        public AccountController(ITestService testService)
         {
-            this._testInterface = test;
+            this._testInterface = testService;
         }
         //----------------------------------
 
@@ -61,12 +61,15 @@ namespace SSCMP.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
+     
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            
+            //測試是否有從Service -> Repository -> DB去新增一筆資料
+            this._testInterface.InsertEmployee();
+
             return View();
         }
 
