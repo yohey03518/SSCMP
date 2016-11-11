@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SCCMP.Service.Interface
+namespace SCCMP.Service
 {
-    public interface TestInterface
+    public interface ITestService
     {
+        // 流程測試
+        void InsertEmployee();
     }
 }
