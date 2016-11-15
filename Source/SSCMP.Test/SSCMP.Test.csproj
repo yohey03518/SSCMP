@@ -75,7 +75,7 @@
       <Project>{e823efc0-6ae1-4db0-89b9-afe74352dcd1}</Project>
       <Name>SSCMP.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SSCMP\SSCMP.UI.csproj">
+    <ProjectReference Include="..\SSCMP.UI\SSCMP.UI.csproj">
       <Project>{895bcfe0-3eba-40a9-89cc-efb08ce708b2}</Project>
       <Name>SSCMP.UI</Name>
     </ProjectReference>
