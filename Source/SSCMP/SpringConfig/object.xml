@@ -6,11 +6,11 @@
   </object>
   <object id ="home" type="SSCMP.Controllers.HomeController , SSCMP" singleton="false"/>
   <!--Service-->
-  <object id="testService" type="SCCMP.Service.TestService , SCCMP.Service" singleton="false">
+  <object id="testService" type="SSCMP.Service.TestService , SSCMP.Service" singleton="false">
     <constructor-arg ref="employeeRepository" />
   </object>
   <!--Repository-->
-  <object id="employeeRepository" type="SCCMP.Repository.EmployeeRepository , SCCMP.Repository" singleton="false"/>
+  <object id="employeeRepository" type="SSCMP.Repository.EmployeeRepository , SSCMP.Repository" singleton="false"/>
 </objects>
 
 

@@ -259,13 +259,13 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SCCMP.Domain\SCCMP.Domain.csproj">
+    <ProjectReference Include="..\SSCMP.Domain\SSCMP.Domain.csproj">
       <Project>{6cc88157-23fd-4e48-b276-ef1fb129d497}</Project>
-      <Name>SCCMP.Domain</Name>
+      <Name>SSCMP.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SCCMP.Service\SCCMP.Service.csproj">
+    <ProjectReference Include="..\SSCMP.Service\SSCMP.Service.csproj">
       <Project>{e823efc0-6ae1-4db0-89b9-afe74352dcd1}</Project>
-      <Name>SCCMP.Service</Name>
+      <Name>SSCMP.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
