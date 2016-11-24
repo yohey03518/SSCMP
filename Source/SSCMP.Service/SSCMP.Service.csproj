@@ -39,8 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\ControlService\IHomeService.cs" />
+    <Compile Include="Interface\DBService\IAreaDataService.cs" />
     <Compile Include="Interface\TestInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\ControlService\HomeService.cs" />
+    <Compile Include="Service\DBService\AreaDataService.cs" />
     <Compile Include="Service\TestService.cs" />
   </ItemGroup>
   <ItemGroup>

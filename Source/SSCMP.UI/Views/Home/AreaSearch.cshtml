@@ -1,0 +1,33 @@
+﻿<div>
+    <label id="coach">
+        <input type="radio" name="type" value="coach" checked /><span>找教練</span>
+    </label>
+    <label id="student">
+        <input type="radio" name="type" value="student" /><span>找學生</span>
+    </label>
+</div>
+<div>
+    <label>
+        <input type="radio" name="sex" checked /><span>不拘</span>
+    </label>
+    <label id="male">
+        <input type="radio" name="sex" /><span>找男教練</span>
+    </label>
+    <label id="female">
+        <input type="radio" name="sex" /><span>找女教練</span>
+    </label>
+</div>
+@{Html.RenderAction("AreaTree", "Home", new { id = "areaTree" });}
+<div>
+    <input type="button" value="地區reset" onclick="$('#areaTree').jstree('deselect_all');"/>
+    <input type="button" value="GO" />
+</div>
+<script type="text/javascript">
+    $(function () {
+        // 找教練/學生代換選項事件
+        $('input[type=radio][name=type]').change(function () {
+            $('#male span').text("找男" + $(this).parent().find('span').text().substring(1, 3));
+            $('#female span').text("找女" + $(this).parent().find('span').text().substring(1, 3));
+        })
+    });
+</script>

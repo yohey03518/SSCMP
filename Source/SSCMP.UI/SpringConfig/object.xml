@@ -1,16 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <objects xmlns="http://www.springframework.net">
+  
   <!--Controller-->
-  <object id="account" type="SSCMP.Controllers.AccountController , SSCMP"  singleton="false">
-    <constructor-arg ref="testService" />
+  <object id="home" type="SSCMP.Controllers.HomeController, SSCMP" singleton="false">
+    <property name="HomeService" ref="HomeService"/>
   </object>
-  <object id ="home" type="SSCMP.Controllers.HomeController , SSCMP" singleton="false"/>
+  
   <!--Service-->
-  <object id="testService" type="SSCMP.Service.TestService , SSCMP.Service" singleton="false">
-    <constructor-arg ref="employeeRepository" />
+  <object id="HomeService" type="SSCMP.Service.HomeService, SSCMP.Service" singleton="false">
+    <property name="AreaDataService" ref="AreaDataService"/>
   </object>
+  <object id="AreaDataService" type="SSCMP.Service.AreaDataService, SSCMP.Service" singleton="false">
+    <property name="AreaDataRepo" ref="AreaDataRepository"/>
+  </object>
+  
   <!--Repository-->
-  <object id="employeeRepository" type="SSCMP.Repository.EmployeeRepository , SSCMP.Repository" singleton="false"/>
+  <object id="AreaDataRepository" type="SSCMP.Repository.AreaDataRepository , SSCMP.Repository" singleton="false"/>
 </objects>
 
 

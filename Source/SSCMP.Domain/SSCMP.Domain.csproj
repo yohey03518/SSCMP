@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\AreaDTO.cs" />
+    <Compile Include="DTO\CommomCodeDTO.cs" />
     <Compile Include="Entity\AreaData.cs" />
     <Compile Include="Entity\CoachPost.cs" />
     <Compile Include="Entity\Department.cs" />
@@ -68,9 +70,7 @@
     <Compile Include="Map\UserAccountMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -31,17 +31,20 @@ namespace SSCMP.Repository
             _sessionFactory = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008
                   .ConnectionString(
-                  @"Server=(local);initial catalog=SSCMP_TEST;user=sa;password=1234;") // Modify your ConnectionString
+                  @"Server=(local);initial catalog=SSCMP;Integrated Security=SSPI;") // Modify your ConnectionString
                               .ShowSql()
                 )
                 .Mappings(m =>
                           m.FluentMappings
                               .AddFromAssemblyOf<Employee>())
-                .Mappings(m => 
+                .Mappings(m =>
                           m.FluentMappings
                               .AddFromAssemblyOf<Department>())
-                .ExposeConfiguration(cfg => new SchemaExport(cfg)
-                                                .Create(true, true))
+                .Mappings(m =>
+                          m.FluentMappings
+                              .AddFromAssemblyOf<AreaData>())
+                //.ExposeConfiguration(cfg => new SchemaExport(cfg)
+                //                                .Create(true, true))
                 .BuildSessionFactory();
         }
 
