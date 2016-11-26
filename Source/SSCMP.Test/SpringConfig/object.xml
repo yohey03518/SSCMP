@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  
+  <!--Controller-->
+  <object id="home" type="SSCMP.Controllers.HomeController, SSCMP" singleton="false">
+    <property name="HomeService" ref="HomeService"/>
+  </object>
+  
+  <!--Service-->
+  <object id="HomeService" type="SSCMP.Service.HomeService, SSCMP.Service" singleton="false">
+    <property name="AreaDataService" ref="AreaDataService"/>
+  </object>
+  <object id="AreaDataService" type="SSCMP.Service.AreaDataService, SSCMP.Service" singleton="false">
+    <property name="AreaDataRepo" ref="AreaDataRepository"/>
+  </object>
+  
+  <!--Repository-->
+  <object id="AreaDataRepository" type="SSCMP.Repository.AreaDataRepository , SSCMP.Repository" singleton="false"/>
+</objects>
+
+

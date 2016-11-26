@@ -51,6 +51,7 @@ namespace SSCMP.Service
                     TownshipList = (from township in townships
                                     select new CommonCodeDTO { Code = township.AreaId, CodeName = township.AreaName }).ToList()
                 };
+                result.Add(oneCounty);
             }
 
             return result;
